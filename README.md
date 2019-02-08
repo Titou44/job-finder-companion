@@ -20,6 +20,22 @@ $ cd ~/git/job-finder-companion
 $ composer install --prefer-dist
 ```
 
+## Install Mysql and configure the app 💾
+
+Create a .env.local file and add a line to configure your database access:
+
+```
+DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/job-finder-companion
+```
+
+Create the database and tables then load the test fixtures:
+
+```
+$ bin/console doctrine:database:create
+$ bin/console doctrine:migrations:migrate
+$ bin/console doctrine:fixtures:load
+```
+
 ### Launch the development web server 🚀
 
 ```
