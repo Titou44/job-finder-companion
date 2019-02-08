@@ -46,3 +46,6 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+# ignore the PHPStorm config directory
+.idea
