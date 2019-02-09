@@ -3,10 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('css/bootstrap-grid.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('css/bootstrap-reboot.min.css') }}" rel="stylesheet" />
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+        <h1>Companion</h1>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
