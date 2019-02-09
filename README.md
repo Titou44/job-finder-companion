@@ -2,7 +2,7 @@
 
 Small webapp to help you to manage your applications and to practise my new craft!
 
-## Installation 🛠️
+## Installation for development 🛠️
 
 ### Clone the project ⬇️
 
@@ -11,35 +11,50 @@ $ cd ~/git
 $ git clone git@github.com:Titou44/job-finder-companion.git
 ```
 
-### Install composer and PHP dependencies 📦
+### Launch the Docker image 🐋
 
-Using [composer doc](https://getcomposer.org/download/)
+Let's use `docker-compose` to build and launch development Docker image:
 
 ```
 $ cd ~/git/job-finder-companion
-$ composer install --prefer-dist
+$ docker-compose up -d
 ```
 
-### Install Mysql and configure the app 💾
-
-Create a .env.local file and add a line to configure your database access:
+### Install the PHP dependencies 📦
 
 ```
-DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/job-finder-companion
+$ bin/docker-composer install --prefer-dist
 ```
 
-Create the database and tables then load the test fixtures:
+### Setup the demo data 💾
+
+Create the tables then load the demo data fixtures:
 
 ```
-$ bin/console doctrine:database:create
-$ bin/console doctrine:migrations:migrate
-$ bin/console doctrine:fixtures:load
+$ bin/docker-console doctrine:migrations:migrate
+$ bin/docker-console doctrine:fixtures:load
 ```
 
-### Launch the development web server 🚀
+### Use the web application 🚀
+
+Web application is available in your web browser using `http://127.0.0.1:8100`
+
+## Development commands
+
+Re-build the Docker images:
 
 ```
-$ php bin/console server:run
+$ docker-compose build
 ```
 
-And access the application with your web browser using http://127.0.0.1:8000
+List running Docker containers, state and ports:
+
+```
+$ docker-compose ps
+```
+
+Update the PHP dependencies:
+
+```
+$ bin/docker-composer update --prefer-dist
+```

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secret_password
+      MYSQL_DATABASE: job-finder-companion
+      MYSQL_USER: dev_user
+      MYSQL_PASSWORD: dev_password
+    ports:
+      - "9906:3306"
+  web:
+    build:
+      context: .
+      dockerfile: .docker/web.dockerfile
+    image: web.local
+    container_name: php_web
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html/
+    ports:
+      - "8100:80"
+    stdin_open: true
+    tty: true
