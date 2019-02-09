@@ -20,7 +20,7 @@ $ cd ~/git/job-finder-companion
 $ composer install --prefer-dist
 ```
 
-## Install Mysql and configure the app 💾
+### Install Mysql and configure the app 💾
 
 Create a .env.local file and add a line to configure your database access:
 

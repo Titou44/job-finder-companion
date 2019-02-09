@@ -10,11 +10,22 @@ class CompanyFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $company = new Company();
-        $company->setName('Acme');
-        $manager->persist($company);
-
-
+        $companiesData = $this->getCompaniesData();
+        foreach ($companiesData as $key => $companyData) {
+            $company = new Company();
+            $company->setName($companyData[0]);
+            $manager->persist($company);
+            $this->addReference($key, $company);
+        }
         $manager->flush();
+    }
+
+    private function getCompaniesData(): array
+    {
+        return [
+            'company-acme' => ['Acme'],
+            'company-google' => ['Google'],
+            'company-ibm' => ['IBM'],
+        ];
     }
 }
