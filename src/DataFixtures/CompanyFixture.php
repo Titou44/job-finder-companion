@@ -26,11 +26,11 @@ class CompanyFixture extends Fixture
     private function getCompaniesData(): array
     {
         return [
-            'company-acme' => ['Acme','Customer',null,null],
-            'company-google' => ['Google','Software vendor', 5, null],
-            'company-ibm' => ['IBM','Software vendor', 4, null],
-            'company-abba' => ['Abba','Recruitment company', 3, null],
-            'company-sp' => ['Sp','Solution provider', 0, null],
+            'company-acme' => ['Acme',Company::$TYPE_CUSTOMER,null,null],
+            'company-google' => ['Google',Company::$TYPE_SOFTWARE_VENDOR, 5, null],
+            'company-ibm' => ['IBM',Company::$TYPE_SOFTWARE_VENDOR, 4, null],
+            'company-abba' => ['Abba',Company::$TYPE_RECRUITMENT_COMPANY, 3, null],
+            'company-sp' => ['Sp',Company::$TYPE_SOLUTION_PROVIDER, 0, null],
         ];
     }
 }

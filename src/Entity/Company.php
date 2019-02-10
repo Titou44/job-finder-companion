@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Company
 {
+    public static $TYPE_CUSTOMER = 'Customer';
+    public static $TYPE_SOFTWARE_VENDOR = 'Software vendor';
+    public static $TYPE_RECRUITMENT_COMPANY = 'Recruitment company';
+    public static $TYPE_SOLUTION_PROVIDER = 'Solution provider';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -87,5 +92,13 @@ class Company
         $this->comment = $comment;
 
         return $this;
+    }
+    public static function getTypes(){
+        return  [
+            Company::$TYPE_SOLUTION_PROVIDER=>Company::$TYPE_SOLUTION_PROVIDER,
+            Company::$TYPE_RECRUITMENT_COMPANY=>Company::$TYPE_RECRUITMENT_COMPANY,
+            Company::$TYPE_SOFTWARE_VENDOR=>Company::$TYPE_SOFTWARE_VENDOR,
+            Company::$TYPE_CUSTOMER=>Company::$TYPE_CUSTOMER,
+        ];
     }
 }

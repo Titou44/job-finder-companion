@@ -1,10 +1,9 @@
 <?php
-// src/Controller/LuckyController.php
+
 namespace App\Controller;
 
 use App\Entity\Company;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CompanyController extends AbstractController
@@ -12,7 +11,7 @@ class CompanyController extends AbstractController
     /**
      * @Route("/")
      */
-    public function number()
+    public function index()
     {
         $repository = $this->getDoctrine()->getManager()->getRepository(Company::class);
         $companies = $repository->findAll();
