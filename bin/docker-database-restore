@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+last_backup_to_restore=$( ls -t ./data/ | head -1 )
+echo ">> Restore last backup file" $last_backup_to_restore "🤖 <<"
+cat ./data/$last_backup_to_restore | docker exec -i db /usr/bin/mysql -u root --password=my_secret_password job-finder-companion

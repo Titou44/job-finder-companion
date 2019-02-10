@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+current_date=$( date +%Y-%m-%d_%H-%M-%S )
+echo ">> Backup the current database 🤖 <<"
+docker exec db /usr/bin/mysqldump -u root --password=my_secret_password job-finder-companion > ./data/backup-$current_date.sql

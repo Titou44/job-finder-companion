@@ -69,7 +69,7 @@ List running Docker containers, state and ports:
 $ docker-compose ps
 ```
 
-### Build and Push Docker Image
+### Build and push Docker image to Dockerhub
 
 We use a custom Docker images for the web:
 
@@ -77,4 +77,16 @@ We use a custom Docker images for the web:
 $ docker build -t nidup/job-finder-companion-web:latest .docker/web/
 $ docker login -u titou44
 $ docker push nidup/job-finder-companion-web:latest
+```
+
+### Backup & restore production data 💾
+
+Backup the current database content in the `data` folder:
+```
+$ bin/docker-database-backup
+```
+
+Restore the last backup from the `data` folder:
+```
+$ bin/docker-database-restore
 ```

@@ -22,3 +22,6 @@
 
 # ignore cs fixer cache
 .php_cs.cache
+
+# ignore data backup
+data/*.sql
