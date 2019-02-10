@@ -58,3 +58,9 @@ Update the PHP dependencies:
 ```
 $ bin/docker-composer update --prefer-dist
 ```
+
+Launch PHP CS Fixer:
+
+```
+$ bin/docker-php-cs-fixer fix --diff --dry-run src/ --rules=@PSR2
+```
