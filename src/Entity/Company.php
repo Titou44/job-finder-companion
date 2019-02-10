@@ -93,7 +93,8 @@ class Company
 
         return $this;
     }
-    public static function getTypes(){
+    public static function getTypes()
+    {
         return  [
             Company::$TYPE_SOLUTION_PROVIDER=>Company::$TYPE_SOLUTION_PROVIDER,
             Company::$TYPE_RECRUITMENT_COMPANY=>Company::$TYPE_RECRUITMENT_COMPANY,

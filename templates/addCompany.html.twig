@@ -2,6 +2,40 @@
 {% block body %}
     <div class="container">
         <h1>Add company</h1>
-        {{ form(form) }}
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.name, "Name",{'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.name, {'attr':{ 'class': 'form-control','placeholder':'Enter the company\'s name' }}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.type, "Type",{'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.type, {'attr':{ 'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.grading, "Grading",{'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.grading, {'attr':{ 'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.comment,"Comment (optional)", {'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.comment, {'attr':{ 'class': 'form-control','rows':'3','placeholder':'...'}}) }}
+        </div>
+        {% if form_errors(form)|length > 0 %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% else %}
+            {% set company = form.vars.value %}
+            {% if form.vars.valid == true and form.vars.submitted == true %}
+                <div class="alert alert-success">
+                    <div class="text-justify">
+                        <p>The new company has been successfully saved</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+        <div>
+            {{ form_widget(form.submit) }}
+        </div>
+        {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -31,7 +31,20 @@ class AddCompanyController extends AbstractController
                     'choices' => Company::getTypes(),
                 ]
             )
-            ->add('grading', IntegerType::class, ['required' => false])
+            ->add(
+                'grading',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        '0' => 0,
+                        '1' => 1,
+                        '2' => 2,
+                        '3' => 3,
+                        '4' => 4,
+                        '5' => 5,
+                    ],
+                ]
+            )
             ->add('comment', TextareaType::class, ['required' => false])
             ->add(
                 'submit',
@@ -42,6 +55,15 @@ class AddCompanyController extends AbstractController
                 ]
             );
         $form = $formBuilder->getForm();
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($company);
+                $em->flush();
+            }
+        }
 
 
         return $this->render('addCompany.html.twig', ['form' => $form->createView()]);
