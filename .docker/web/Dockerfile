@@ -1,6 +1,6 @@
 FROM php:7.2.2-apache
 
-COPY ./.docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY ./vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # PHP, Mysql and Apache deps
 RUN apt-get update

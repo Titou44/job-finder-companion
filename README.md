@@ -41,6 +41,22 @@ Web application is available in your web browser using `http://127.0.0.1:8100`
 
 ## Development commands
 
+### Launch PHP tools
+
+Update the PHP dependencies:
+
+```
+$ bin/docker-composer update --prefer-dist
+```
+
+Launch PHP CS Fixer:
+
+```
+$ bin/docker-php-cs-fixer fix --diff --dry-run src/ --rules=@PSR2
+```
+
+### Use Docker
+
 Re-build the Docker images:
 
 ```
@@ -53,14 +69,12 @@ List running Docker containers, state and ports:
 $ docker-compose ps
 ```
 
-Update the PHP dependencies:
+### Build and Push Docker Image
+
+We use a custom Docker images for the web:
 
 ```
-$ bin/docker-composer update --prefer-dist
-```
-
-Launch PHP CS Fixer:
-
-```
-$ bin/docker-php-cs-fixer fix --diff --dry-run src/ --rules=@PSR2
+$ docker build -t nidup/job-finder-companion-web:latest .docker/web/
+$ docker login -u titou44
+$ docker push nidup/job-finder-companion-web:latest
 ```

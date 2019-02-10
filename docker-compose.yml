@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: mysql:5.7
+    container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: my_secret_password
       MYSQL_DATABASE: job-finder-companion
@@ -11,11 +12,8 @@ services:
     ports:
       - "9906:3306"
   web:
-    build:
-      context: .
-      dockerfile: .docker/web.dockerfile
-    image: web.local
-    container_name: php_web
+    image: nidup/job-finder-companion-web:latest
+    container_name: web
     depends_on:
       - db
     volumes:
