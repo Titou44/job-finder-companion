@@ -25,3 +25,7 @@
 
 # ignore data backup
 data/*.sql
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
