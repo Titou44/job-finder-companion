@@ -1,6 +1,12 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_company_index') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add company</li>
+            </ol>
+        </nav>
         <h1>Add company</h1>
         {{ form_start(form) }}
         <div class="form-group">

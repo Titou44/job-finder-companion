@@ -1,8 +1,17 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <div class="container">
-        <h1>Companies</h1>
-        <a href="{{ path('app_addcompany_addcompany') }}" class="btn btn-light">Add company</a>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+        </nav>
+        <div class="form-inline">
+            <div class="h2 col-md-7">Companies</div>
+            <div class="h4 col-md-5" align="right">
+                <a href="{{ path('app_addcompany_addcompany') }}" class="btn btn-light">Add company</a>
+            </div>
+        </div>
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
