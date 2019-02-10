@@ -9,5 +9,11 @@ jobs:
           name: Start containers
           command: docker-compose up -d
       - run:
-          name: Php CS Fixer
+          name: Run PHP CS Fixer
           command: docker-compose exec -T web php-cs-fixer fix --diff --dry-run src/ --rules=@PSR2
+      - run:
+          name: Install PHP dependencies
+          command: docker-compose exec -T web composer install
+      - run:
+          name: Run PHP Units
+          command: docker-compose exec -T web php bin/phpunit
