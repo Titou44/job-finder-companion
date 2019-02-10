@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: Start containers
+          command: docker-compose up -d
+      - run:
+          name: Php CS Fixer
+          command: docker-compose exec -T web php-cs-fixer fix --diff --dry-run src/ --rules=@PSR2

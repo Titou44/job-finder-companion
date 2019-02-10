@@ -19,3 +19,6 @@
 
 # ignore the PHPStorm config directory
 .idea
+
+# ignore cs fixer cache
+.php_cs.cache
