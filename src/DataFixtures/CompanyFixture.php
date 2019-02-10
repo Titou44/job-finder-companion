@@ -14,6 +14,9 @@ class CompanyFixture extends Fixture
         foreach ($companiesData as $key => $companyData) {
             $company = new Company();
             $company->setName($companyData[0]);
+            $company->setType($companyData[1]);
+            $company->setGrading($companyData[2]);
+            $company->setComment($companyData[3]);
             $manager->persist($company);
             $this->addReference($key, $company);
         }
@@ -23,9 +26,11 @@ class CompanyFixture extends Fixture
     private function getCompaniesData(): array
     {
         return [
-            'company-acme' => ['Acme'],
-            'company-google' => ['Google'],
-            'company-ibm' => ['IBM'],
+            'company-acme' => ['Acme','Customer',null,null],
+            'company-google' => ['Google','Software vendor', 5, null],
+            'company-ibm' => ['IBM','Software vendor', 4, null],
+            'company-abba' => ['Abba','Recruitment company', 3, null],
+            'company-sp' => ['Sp','Solution provider', 0, null],
         ];
     }
 }

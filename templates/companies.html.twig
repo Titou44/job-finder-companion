@@ -6,12 +6,20 @@
             <thead class="thead-light">
             <tr>
                 <th>Name</th>
+                <th>Type</th>
+                <th>Grading</th>
             </tr>
             </thead>
             <tbody>
             {% for company in companies %}
                 <tr scope="row">
                     <td>{{ company.name }}</td>
+                    <td>{{ company.type }}</td>
+                    <td>
+                        {% for star_index in 1..5 %}
+                            <span class="fa fa-star {% if company.grading >= star_index %}checked{% endif %}"></span>
+                        {% endfor %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
