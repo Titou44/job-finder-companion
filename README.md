@@ -55,6 +55,12 @@ Launch PHP CS Fixer:
 $ bin/docker-php-cs-fixer fix --diff --dry-run src/ --rules=@PSR2
 ```
 
+Launch PHP Units:
+
+```
+$ bin/docker-phpunit
+```
+
 ### Use Docker
 
 Re-build the Docker images:
