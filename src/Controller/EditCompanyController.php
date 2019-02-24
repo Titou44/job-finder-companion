@@ -13,17 +13,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AddCompanyController extends AbstractController
+class EditCompanyController extends AbstractController
 {
     /**
-     * @Route("/addCompany")
+     * @Route("/editCompany/{id}", name="app_editcompany_number")
+     * @param int $id
+     * @param Request $request
+     * @return Response
      */
-    public function addCompany(Request $request): Response
+    public function editCompany(int $id, Request $request): Response
     {
-        $company = new Company();
+        $em = $this->getDoctrine()->getManager();
+
+        $company = $em
+            ->getRepository(Company::class)
+            ->find($id);
+
 
         $formBuilder = $this->createFormBuilder($company);
-        $formBuilder->add('name', TextType::class)
+        $formBuilder->add('name', TextType::class, ['disabled' => true])
+//            ->add('id', IntegerType::class)
             ->add(
                 'type',
                 ChoiceType::class,
@@ -47,10 +56,10 @@ class AddCompanyController extends AbstractController
             )
             ->add('comment', TextareaType::class, ['required' => false])
             ->add(
-                'submit',
+                'edit',
                 SubmitType::class,
                 [
-                    'label' => 'Add company',
+                    'label' => 'Edit',
                     'attr' => ['class' => 'btn btn-default btn-block'],
                 ]
             );
@@ -58,11 +67,14 @@ class AddCompanyController extends AbstractController
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
-            if ($form->isValid()) {
+            if ($form->get('edit')->isClicked() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($company);
                 $em->flush();
-                $this->addFlash('success', 'The new company has been successfully saved! 😀');
+                $this->addFlash(
+                    'success',
+                    'Validation of your update ! 😀'
+                );
 
                 return $this->redirectToRoute(
                     'app_company_index'
@@ -71,6 +83,6 @@ class AddCompanyController extends AbstractController
         }
 
 
-        return $this->render('addCompany.html.twig', ['form' => $form->createView()]);
+        return $this->render('editCompany.html.twig', ['company' => $company, 'form' => $form->createView()]);
     }
 }
