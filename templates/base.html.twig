@@ -9,16 +9,36 @@
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('css/bootstrap-grid.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('css/bootstrap-reboot.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/fontawesome.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
     {% endblock %}
 </head>
 <body>
-{% block body %}
-    <h1>Companion</h1>
-{% endblock %}
+<div class="container-fluid">
+    {% for label, messages in app.flashes() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% block body %}<br><br>{% endblock %}
+</div>
 {% block javascripts %}
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/fontawesome.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-confirmation.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]',
+        });
+    </script>
 {% endblock %}
 </body>
 </html>

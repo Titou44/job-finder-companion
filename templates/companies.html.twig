@@ -1,17 +1,58 @@
 {% extends "base.html.twig" %}
+
 {% block body %}
     <div class="container">
-        <h1>Companies</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" title="Home"><a
+                            href="{{ path('app_company_index') }}" class="btn grey"><span
+                                class=" fa fa-home"></span></a></li>
+            </ol>
+        </nav>
+        <div class="form-inline">
+            <div class="h2 col-md-7">Companies</div>
+            <div class="h4 col-md-5" align="right">
+
+            </div>
+        </div>
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
                 <th>Name</th>
+                <th>Type</th>
+                <th>Grading</th>
+                <th></th>
+                <th><a href="{{ path('app_addcompany_addcompany') }}" class="btn" data-toggle="tooltip"
+                       title="Add company"><span
+                                class="fa fa-plus grey"></span></a></th>
             </tr>
             </thead>
             <tbody>
             {% for company in companies %}
                 <tr scope="row">
                     <td>{{ company.name }}</td>
+                    <td>{{ company.type }}</td>
+                    <td>
+                        {% for star_index in 1..5 %}
+                            <span class="fa fa-star {% if company.grading >= star_index %}checked{% else %}star{% endif %}"></span>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_editcompany_number',{id: company.getId}) }}" class="btn"
+                           data-toggle="tooltip" title="Edit company"><span
+                                    class="fa fa-pencil-alt blue"></span></a>
+                    </td>
+                    <td>
+                        <div class="btn" data-toggle="tooltip" title="Remove company">
+                            <a data-toggle="confirmation"
+                               data-placement="top"
+                               data-title="Delete company"
+                               data-content="Are you sure you want to delete this company?"
+                               href="{{ path('app_company_delete',{id: company.id}) }}">
+                                <span class="fa fa-trash-alt red"></span>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

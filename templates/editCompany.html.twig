@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_company_index') }}" class="btn" data-toggle="tooltip"
+                                               title="Home"><span
+                                class=" fa fa-home"></span></a></li>
+                <li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" title="Edit company"><a
+                            class="btn"><span
+                                class="fa fa-pencil-alt grey"></span></a></li>
+            </ol>
+        </nav>
+        <h1>Add company</h1>
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.name, "Name",{'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.name, {'attr':{ 'class': 'form-control','placeholder':'Enter the company\'s name' }}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.type, "Type",{'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.type, {'attr':{ 'class': 'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.grading, "Grading",{'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.grading, {'attr':{ 'class': 'form-control', 'aria-describedby':'gradingHelp'}}) }}
+            <small id="gradingHelp" class="form-text text-muted">You can specify a note from 0 to 5</small>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.comment,"Comment (optional)", {'label_attr':{ 'class': 'col-form-label'}}) }}
+            {{ form_widget(form.comment, {'attr':{ 'class': 'form-control','rows':'3','placeholder':'...'}}) }}
+        </div>
+        {% if form_errors(form)|length > 0 %}
+            <div class="alert alert-danger">
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+        <div>
+            {{ form_widget(form.edit) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
