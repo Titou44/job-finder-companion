@@ -30,27 +30,18 @@ class CompanyController extends AbstractController
      * @param $id
      * @return Response
      */
-    public function delete(Request $request, $id): Response {
+    public function delete(Request $request, $id): Response
+    {
         $company = $this->getDoctrine()
             ->getRepository(Company::class)
             ->find($id);
-/*
-        $form = $this->createFormBuilder($company)
-            ->add('delete', SubmitType::class)
-            ->getForm();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($company);
+        $em->flush();
+        $this->addFlash('success', 'Successful deletion! 😀');
 
-        if ($request->isMethod('POST')) {
-            $form->handleRequest();
-            if ($form->get('delete')->isClicked()) {*/
-                $em = $this->getDoctrine()->getManager();
-                $em->remove($company);
-                $em->flush();
-                $this->addFlash('success', 'Successful deletion! 😀');
-
-                return $this->redirectToRoute(
-                    'app_company_index'
-                );
-//            }
-//        }
+        return $this->redirectToRoute(
+            'app_company_index'
+        );
     }
 }

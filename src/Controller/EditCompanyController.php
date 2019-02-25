@@ -29,10 +29,8 @@ class EditCompanyController extends AbstractController
             ->getRepository(Company::class)
             ->find($id);
 
-
         $formBuilder = $this->createFormBuilder($company);
         $formBuilder->add('name', TextType::class, ['disabled' => true])
-//            ->add('id', IntegerType::class)
             ->add(
                 'type',
                 ChoiceType::class,
@@ -81,7 +79,6 @@ class EditCompanyController extends AbstractController
                 );
             }
         }
-
 
         return $this->render('editCompany.html.twig', ['company' => $company, 'form' => $form->createView()]);
     }

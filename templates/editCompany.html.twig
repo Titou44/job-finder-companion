@@ -3,18 +3,16 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('app_company_index') }}" class="btn" data-toggle="tooltip" title="Home"><span
+                <li class="breadcrumb-item"><a href="{{ path('app_company_index') }}" class="btn" data-toggle="tooltip"
+                                               title="Home"><span
                                 class=" fa fa-home"></span></a></li>
-                <li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" title="Edit company"><a class="btn"><span
+                <li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" title="Edit company"><a
+                            class="btn"><span
                                 class="fa fa-pencil-alt grey"></span></a></li>
             </ol>
         </nav>
         <h1>Add company</h1>
         {{ form_start(form) }}
-        {#<div class="form-group">#}
-            {#{{ form_label(form.id,"id", {'label_attr':{ 'class': 'col-5 col-form-label'}}) }}#}
-            {#{{ form_widget(form.id, {'attr':{ 'class': 'form-control'}}) }}#}
-        {#</div>#}
         <div class="form-group">
             {{ form_label(form.name, "Name",{'label_attr':{ 'class': 'col-form-label'}}) }}
             {{ form_widget(form.name, {'attr':{ 'class': 'form-control','placeholder':'Enter the company\'s name' }}) }}
