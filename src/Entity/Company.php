@@ -15,6 +15,8 @@ class Company
     public static $TYPE_SOLUTION_PROVIDER = 'Solution provider';
 
     /**
+     * @var int
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -22,24 +24,39 @@ class Company
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="text")
      */
     private $type;
 
     /**
+     * @var integer
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $grading;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $comment;
+
+    /**
+     * @var Employee[]
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Employee", mappedBy="company")
+     */
+    private $employees;
 
     public function getId(): ?int
     {
@@ -93,13 +110,33 @@ class Company
 
         return $this;
     }
+
+    /**
+     * @return Employee[]
+     */
+    public function getEmployees(): array
+    {
+        return $this->employees;
+    }
+
+    /**
+     * @param array $employees
+     * @return Company
+     */
+    public function setEmployees(array $employees): self
+    {
+        $this->employees = $employees;
+
+        return $this;
+    }
+
     public static function getTypes()
     {
-        return  [
-            Company::$TYPE_SOLUTION_PROVIDER=>Company::$TYPE_SOLUTION_PROVIDER,
-            Company::$TYPE_RECRUITMENT_COMPANY=>Company::$TYPE_RECRUITMENT_COMPANY,
-            Company::$TYPE_SOFTWARE_VENDOR=>Company::$TYPE_SOFTWARE_VENDOR,
-            Company::$TYPE_CUSTOMER=>Company::$TYPE_CUSTOMER,
+        return [
+            Company::$TYPE_SOLUTION_PROVIDER => Company::$TYPE_SOLUTION_PROVIDER,
+            Company::$TYPE_RECRUITMENT_COMPANY => Company::$TYPE_RECRUITMENT_COMPANY,
+            Company::$TYPE_SOFTWARE_VENDOR => Company::$TYPE_SOFTWARE_VENDOR,
+            Company::$TYPE_CUSTOMER => Company::$TYPE_CUSTOMER,
         ];
     }
 }
