@@ -96,3 +96,37 @@ Restore the last backup from the `data` folder:
 ```
 $ bin/docker-database-restore
 ```
+
+## Production commands
+
+Send the code to the production server:
+```
+$ rsync -e ssh -avz --delete-after --exclude='.git/' --exclude='.env.local' --exclude='vendor' --exclude='var' ./ job-finder-companion:/opt/apps/job-finder-companion/
+```
+
+Connect to the server and launch images:
+```
+$ ssh job-finder-companion
+$ cd /opt/apps/job-finder-companion/
+$ docker-compose up -d
+```
+
+Set production environment:
+```
+$ vi .env.local
+```
+
+With content:
+```
+APP_ENV=prod
+```
+
+Install PHP prod deps:
+```
+$ bin/docker-composer install --prefer-dist --no-dev
+```
+
+Update database schema:
+```
+$ bin/docker-console doctrine:migrations:migrate
+```
