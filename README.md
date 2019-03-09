@@ -39,9 +39,9 @@ $ bin/docker-console doctrine:fixtures:load
 
 Web application is available in your web browser using `http://127.0.0.1:8100`
 
-## Development commands
+## Development commands 🛠️
 
-### Launch PHP tools
+### Launch PHP tools 🐘
 
 Update the PHP dependencies:
 
@@ -61,7 +61,7 @@ Launch PHP Units:
 $ bin/docker-phpunit
 ```
 
-### Use Docker
+### Use Docker 🐋
 
 Re-build the Docker images:
 
@@ -75,7 +75,7 @@ List running Docker containers, state and ports:
 $ docker-compose ps
 ```
 
-### Build and push Docker image to Dockerhub
+### Build and push Docker image to DockerHub 🐋
 
 We use a custom Docker images for the web:
 
@@ -97,36 +97,6 @@ Restore the last backup from the `data` folder:
 $ bin/docker-database-restore
 ```
 
-## Production commands
+## Continuous Deployment 🚀
 
-Send the code to the production server:
-```
-$ rsync -e ssh -avz --delete-after --exclude='.git/' --exclude='.env.local' --exclude='vendor' --exclude='var' ./ job-finder-companion:/opt/apps/job-finder-companion/
-```
-
-Connect to the server and launch images:
-```
-$ ssh job-finder-companion
-$ cd /opt/apps/job-finder-companion/
-$ docker-compose up -d
-```
-
-Set production environment:
-```
-$ vi .env.local
-```
-
-With content:
-```
-APP_ENV=prod
-```
-
-Install PHP prod deps:
-```
-$ bin/docker-composer install --prefer-dist --no-dev
-```
-
-Update database schema:
-```
-$ bin/docker-console doctrine:migrations:migrate
-```
+Each merged Pull Request is deployed on the test server thanks to CircleCi 👷
