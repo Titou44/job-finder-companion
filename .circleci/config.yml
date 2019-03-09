@@ -25,3 +25,44 @@ jobs:
       - run:
           name: Run PHP Units
           command: docker-compose exec -T web ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: Rsync the Application Sources
+          command: |
+            rsync -e ssh -avz --delete-after --exclude='.git/' --exclude='.env.local' --exclude='vendor' --exclude='var' ./ $SSH_USER@$SSH_HOST:$SERVER_APP_PATH
+      - run:
+          name: Start Docker Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd $SERVER_APP_PATH && docker-compose up -d"
+      - run:
+          name: Configure Prod Env
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd $SERVER_APP_PATH && echo 'APP_ENV=prod' > .env.local"
+      - run:
+          name: Install PHP Prod dependencies
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd $SERVER_APP_PATH && bin/docker-composer install --prefer-dist --no-dev"
+      - run:
+          name: Update Database Schema
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd $SERVER_APP_PATH && bin/docker-console doctrine:migrations:migrate --no-interaction"
+      - run:
+          name: Clear Cache
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd $SERVER_APP_PATH && bin/docker-console cache:clear"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
